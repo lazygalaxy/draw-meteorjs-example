@@ -3,25 +3,20 @@ Template.wall.events({
         clearCanvas();
     },
 
-    //choose a color. Initialise the last vals, otherwise a stray line will appear.
+    //choose a color
     "click button.red": function () {
-        setLastXandY(0, 0);
         setColor("red");
     },
     "click button.black": function () {
-        setLastXandY(0, 0);
         setColor("black");
     },
     "click button.white": function () {
-        setLastXandY(0, 0);
         setColor("white");
     },
     "click button.blue": function () {
-        setLastXandY(0, 0);
         setColor("blue");
     },
     "click button.green": function () {
-        setLastXandY(0, 0);
         setColor("green");
     },
     "click button.thicker": function () {
@@ -41,7 +36,6 @@ Template.canvas.events({
     },
     'mouseup': function (event) {
         Session.set('draw', false);
-        setLastXandY(0, 0);
     },
     'mousemove': function (event) {
         if (Session.get('draw')) {
