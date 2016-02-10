@@ -20,16 +20,16 @@ Template.wall.events({
         setColor("green");
     },
     "click button.thicker": function () {
-        incStrokeThick();
+        incSize();
     },
     "click button.thinner": function () {
-        decStrokeThick();
+        decSize();
     },
 });
 
 Template.canvas.events({
     'click': function (event) {
-        markPoint();
+        insertPoint();
     },
     'mousedown': function (event) {
         Session.set('draw', true);
@@ -39,7 +39,7 @@ Template.canvas.events({
     },
     'mousemove': function (event) {
         if (Session.get('draw')) {
-            markPoint();
+            insertPoint();
         }
     }
 });

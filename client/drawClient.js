@@ -31,7 +31,9 @@ Meteor.startup(function () {
                             return d._id;
                         })
                         .enter().append('circle')
-                        .attr('r', strokeThick)
+                        .attr('r', function (d) {
+                            return d.s;
+                        })
                         .attr('cx', function (d) {
                             return d.x;
                         })
@@ -87,26 +89,26 @@ clearCanvas = function () {
 }
 
 // strokeThick
-var strokeThick = 5;
-incStrokeThick = function () {
-    strokeThick += 1;
+var size = 5;
+incSize = function () {
+    size += 1;
 }
 
-decStrokeThick = function () {
-    strokeThick -= 1;
-    if (strokeThick == 0) {
-        strokeThick = 1;
+decSize = function () {
+    size -= 1;
+    if (size == 0) {
+        size = 1;
     }
 }
 
 // strokeColor
-var strokeColor = "black";
-setColor = function (color) {
-    strokeColor = color;
+var color = "black";
+setColor = function (newColor) {
+    color = newColor;
 }
 
 //functions
-markPoint = function () {
+insertPoint = function () {
 
     var offset = $('#canvas').offset();
 
@@ -128,11 +130,7 @@ markPoint = function () {
         //2) draw a line - requires you to change the code in drawing.js
         x: (event.pageX - offset.left),
         y: (event.pageY - offset.top),
-        // Or we could just set the line thickness using buttons and variable
-        w: strokeThick,
-        // We can also use strokeColor, defined by a selection
-        c: strokeColor,
-
-
+        s: size,
+        c: color
     }); // end of points.insert()
 }
