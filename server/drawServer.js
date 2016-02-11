@@ -1,5 +1,5 @@
 Meteor.methods({
     'clear': function () {
-        points.remove({});
+        elements.remove({});
     }
 });

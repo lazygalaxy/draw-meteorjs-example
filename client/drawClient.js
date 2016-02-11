@@ -23,9 +23,6 @@ Meteor.startup(function () {
                     return;
                 }
                 if (svg) {
-
-                    // Remember to format the data properly in markPoints
-
                     // to draw a circle -
                     svg.selectAll('circle').data(data, function (d) {
                             return d._id;
@@ -74,7 +71,7 @@ Meteor.startup(function () {
         } //end of the canvas function
 
     Deps.autorun(function () {
-        var data = points.find({}).fetch();
+        var data = elements.find({}).fetch();
 
         if (canvas) {
             canvas.draw(data);
@@ -112,7 +109,7 @@ insertPoint = function () {
 
     var offset = $('#canvas').offset();
 
-    points.insert({
+    elements.insert({
         //this draws a point exactly where you click the mouse
         // x: (event.pageX - offset.left),
         // y: (event.pageY - offset.top)});
@@ -132,5 +129,5 @@ insertPoint = function () {
         y: (event.pageY - offset.top),
         s: size,
         c: color
-    }); // end of points.insert()
+    }); // end of elements.insert()
 }
