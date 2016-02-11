@@ -3,13 +3,31 @@ Meteor.startup(function () {
         console.log("adding colors");
 
         colors.insert({
-            text: "Blue",
-            class: "blue"
+            hue: 0,
+            sat: 100,
+            light: 50,
+            alpha: 1
         });
 
         colors.insert({
-            text: "Red",
-            class: "red"
+            hue: 90,
+            sat: 100,
+            light: 50,
+            alpha: 1
+        });
+
+        colors.insert({
+            hue: 180,
+            sat: 100,
+            light: 50,
+            alpha: 1
+        });
+
+        colors.insert({
+            hue: 270,
+            sat: 100,
+            light: 50,
+            alpha: 1
         });
     }
 });

@@ -99,7 +99,7 @@ decSize = function () {
 }
 
 // strokeColor
-var color = "black";
+var color = "rgb(100%, 100%, 0%";
 setColor = function (newColor) {
     color = newColor;
 }
