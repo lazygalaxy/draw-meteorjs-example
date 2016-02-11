@@ -15,6 +15,7 @@
 </template>
 
 <template name="toolbar">
+    {{#each getColors}} {{>color}} {{/each}}
     <button class='red'>Red</button>
     <button class='blue'>Blue</button>
     <button class='green'>Green</button>
@@ -23,4 +24,8 @@
     <button class='thicker'>Thicker</button>
     <button class='thinner'>Thinner</button>
     <button class='clear'>Clear</button>
+</template>
+
+<template name="color">
+    <button class='{{class}}'>{{text}}</button>
 </template>
