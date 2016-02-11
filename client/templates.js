@@ -1,9 +1,13 @@
-Template.wall.events({
+Template.toolbar.helpers({
+    getColors: function () {
+        return colors.find({});
+    }
+});
+
+Template.toolbar.events({
     "click button.clear": function (event) {
         clearCanvas();
     },
-
-    //choose a color
     "click button.red": function () {
         setColor("red");
     },
