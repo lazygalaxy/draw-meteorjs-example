@@ -7,8 +7,14 @@
 </body>
 
 <template name="wall">
-    <h1>{{title}}</h1>
-    <button class='clear'>Clear</button>
+    <h1>{{title}}</h1> {{> canvas}} {{>toolbar}}
+</template>
+
+<template name="canvas">
+    <div id='canvas'></div>
+</template>
+
+<template name="toolbar">
     <button class='red'>Red</button>
     <button class='blue'>Blue</button>
     <button class='green'>Green</button>
@@ -16,11 +22,5 @@
     <button class='white'>White</button>
     <button class='thicker'>Thicker</button>
     <button class='thinner'>Thinner</button>
-
-    {{> canvas}}
-
-</template>
-
-<template name="canvas">
-    <div id='canvas'></div>
+    <button class='clear'>Clear</button>
 </template>
