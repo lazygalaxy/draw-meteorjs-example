@@ -29,7 +29,7 @@ Template.wall.events({
 
 Template.canvas.events({
     'click': function (event) {
-        insertPoint();
+        insertElement();
     },
     'mousedown': function (event) {
         Session.set('draw', true);
@@ -39,7 +39,7 @@ Template.canvas.events({
     },
     'mousemove': function (event) {
         if (Session.get('draw')) {
-            insertPoint();
+            insertElement();
         }
     }
 });

@@ -104,8 +104,7 @@ setColor = function (newColor) {
     color = newColor;
 }
 
-//functions
-insertPoint = function () {
+insertElement = function () {
 
     var offset = $('#canvas').offset();
 
