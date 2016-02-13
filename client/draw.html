@@ -7,7 +7,7 @@
 </body>
 
 <template name="wall">
-    <h1>{{title}}</h1> {{> canvas}} {{>toolbar}}
+    <h1>{{title}}</h1> {{>toolbar}} {{> canvas}} {{>colorbar}}
 </template>
 
 <template name="canvas">
@@ -15,12 +15,17 @@
 </template>
 
 <template name="toolbar">
-    {{#each getColors}} {{>color}} {{/each}}
     <button class='thicker'>Thicker</button>
     <button class='thinner'>Thinner</button>
-    <button class='clear'>Clear</button>
+    <button class='clear'>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
+</template>
+
+<template name="colorbar">
+    {{#each getColors}} {{>color}} {{/each}}
 </template>
 
 <template name="color">
-    <button style="background: {{getHSLAColor}};" class='custom' value="hsla({{hue}}, {{sat}}%, {{light}}%, {{alpha}})">L</button>
+    <button style="background: {{getHSLAColor this}};" class='choose' value="{{getHSLAColor this}}">L</button>
 </template>

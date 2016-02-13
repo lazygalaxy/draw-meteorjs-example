@@ -5,30 +5,27 @@ Meteor.startup(function () {
         colors.insert({
             hue: 0,
             sat: 100,
-            light: 50,
+            light: 0,
             alpha: 1
         });
 
         colors.insert({
-            hue: 90,
+            hue: 0,
             sat: 100,
-            light: 50,
+            light: 100,
             alpha: 1
         });
 
-        colors.insert({
-            hue: 180,
-            sat: 100,
-            light: 50,
-            alpha: 1
-        });
-
-        colors.insert({
-            hue: 270,
-            sat: 100,
-            light: 50,
-            alpha: 1
-        });
+        var totalColors = 16;
+        var hueStep = 360 / totalColors;
+        for (var i = 0; i < totalColors; i++) {
+            colors.insert({
+                hue: i * hueStep,
+                sat: 100,
+                light: 50,
+                alpha: 1
+            });
+        }
     }
 });
 

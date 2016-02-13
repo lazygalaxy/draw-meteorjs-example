@@ -1,9 +1,12 @@
-Template.toolbar.helpers({
+Template.colorbar.helpers({
     getColors: function () {
         return colors.find({});
-    },
-    getHSLAColor: function () {
-        return "yellow"
+    }
+});
+
+Template.color.helpers({
+    getHSLAColor: function (color) {
+        return "hsla(" + color.hue + ", " + color.sat + "%, " + color.light + "%, " + color.alpha + ")";
     }
 });
 
@@ -11,14 +14,17 @@ Template.toolbar.events({
     "click button.clear": function (event) {
         clearCanvas();
     },
-    "click button.custom": function (event) {
-        setColor(event.target.value);
-    },
     "click button.thicker": function () {
         incSize();
     },
     "click button.thinner": function () {
         decSize();
+    }
+});
+
+Template.colorbar.events({
+    "click button.choose": function (event) {
+        setColor(event.target.value);
     }
 });
 
