@@ -13,12 +13,6 @@ Template.color.helpers({
 Template.toolbar.events({
     "click button.clear": function (event) {
         clearCanvas();
-    },
-    "click button.thicker": function () {
-        incSize();
-    },
-    "click button.thinner": function () {
-        decSize();
     }
 });
 

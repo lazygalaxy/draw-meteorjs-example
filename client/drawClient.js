@@ -85,17 +85,27 @@ clearCanvas = function () {
     });
 }
 
-// strokeThick
-var size = 5;
-incSize = function () {
-    size += 1;
+var size = config.find({
+    tag: "size"
+}).fetch()[0].value;
+
+setSize = function (newSize) {
+    console.log("before " + size);
+
+//    config.update({
+//        tag: "size"
+//    }, {
+//        $set: {
+//            value: newSize
+//        }
+//    });
+
+    size = newSize;
+    console.log("after " + size);
 }
 
-decSize = function () {
-    size -= 1;
-    if (size == 0) {
-        size = 1;
-    }
+getSize = function () {
+    return size;
 }
 
 // strokeColor
@@ -126,7 +136,7 @@ insertElement = function () {
         //2) draw a line - requires you to change the code in drawing.js
         x: (event.pageX - offset.left),
         y: (event.pageY - offset.top),
-        s: size,
+        s: getSize(),
         c: color
     }); // end of elements.insert()
 }

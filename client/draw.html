@@ -15,10 +15,9 @@
 </template>
 
 <template name="toolbar">
-    <button class='thicker'>Thicker</button>
-    <button class='thinner'>Thinner</button>
-    <button class='clear'>
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    <div id='size-slider'></div>
+    <button type="button" class="btn btn-default clear">
+        <span class="glyphicon glyphicon-trash"></span>
     </button>
 </template>
 
@@ -27,5 +26,5 @@
 </template>
 
 <template name="color">
-    <button style="background: {{getHSLAColor this}};" class='choose' value="{{getHSLAColor this}}">L</button>
+    <button type="button" class="btn btn-default choose" style="background: {{getHSLAColor this}};" value="{{getHSLAColor this}}">.</button>
 </template>

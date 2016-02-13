@@ -1,4 +1,15 @@
 Meteor.startup(function () {
+    if (!config.findOne()) {
+        config.insert({
+            tag: "color",
+            value: "blue"
+        });
+        config.insert({
+            tag: "size",
+            value: 20
+        });
+    }
+
     if (!colors.findOne()) {
         console.log("adding colors");
 
