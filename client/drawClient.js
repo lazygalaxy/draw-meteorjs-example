@@ -1,3 +1,8 @@
+//collections
+Meteor.subscribe("colors");
+Meteor.subscribe("configs");
+Meteor.subscribe("elements");
+
 // canvas
 var canvas;
 Meteor.startup(function () {
@@ -85,27 +90,24 @@ clearCanvas = function () {
     });
 }
 
-var size = config.find({
-    tag: "size"
-}).fetch()[0].value;
-
 setSize = function (newSize) {
     console.log("before " + size);
 
-//    config.update({
-//        tag: "size"
-//    }, {
-//        $set: {
-//            value: newSize
-//        }
-//    });
+    //    configs.update({
+    //        tag: "size"
+    //    }, {
+    //        $set: {
+    //            value: newSize
+    //        }
+    //    });
 
-    size = newSize;
     console.log("after " + size);
 }
 
 getSize = function () {
-    return size;
+    return configs.find({
+        tag: "size"
+    }).fetch()[0].value;
 }
 
 // strokeColor

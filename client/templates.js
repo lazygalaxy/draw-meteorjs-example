@@ -1,6 +1,6 @@
 Template.colorbar.helpers({
     getColors: function () {
-        return colors.find({});
+        return colors.find();
     }
 });
 
