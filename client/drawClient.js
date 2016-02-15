@@ -11,8 +11,8 @@ Meteor.startup(function () {
 
             var createSvg = function () {
                 svg = d3.select('#canvas').append('svg')
-                    .attr('width', 800)
-                    .attr('height', 600);
+                    .attr('width', 2000)
+                    .attr('height', 300);
             };
             createSvg();
 

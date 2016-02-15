@@ -3,3 +3,7 @@
     top: 100%;
     margin-left: -1.36em;
 }
+
+.border {
+    border-style: solid;
+}

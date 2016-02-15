@@ -28,19 +28,40 @@ if (!colors.findOne()) {
 
     colors.insert({
         hue: 0,
-        sat: 100,
+        sat: 0,
         light: 0,
         alpha: 1
     });
 
     colors.insert({
         hue: 0,
-        sat: 100,
+        sat: 0,
+        light: 25,
+        alpha: 1
+    });
+
+    colors.insert({
+        hue: 0,
+        sat: 0,
+        light: 50,
+        alpha: 1
+    });
+
+    colors.insert({
+        hue: 0,
+        sat: 0,
+        light: 75,
+        alpha: 1
+    });
+
+    colors.insert({
+        hue: 0,
+        sat: 0,
         light: 100,
         alpha: 1
     });
 
-    var totalColors = 16;
+    var totalColors = 32;
     var hueStep = 360 / totalColors;
     for (var i = 0; i < totalColors; i++) {
         colors.insert({
