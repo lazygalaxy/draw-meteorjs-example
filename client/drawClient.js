@@ -1,6 +1,5 @@
 //collections
 Meteor.subscribe("colors");
-Meteor.subscribe("configs");
 Meteor.subscribe("elements");
 
 // canvas
@@ -90,33 +89,24 @@ clearCanvas = function () {
     });
 }
 
+insertElement = function (draw) {
+    if (draw) {
+        var offset = $('#canvas').offset();
+        Meteor.call('insert', event.pageX - offset.left, event.pageY - offset.top, getSize(), color, function () {});
+    }
+}
+
+// size
+var size = 20;
 setSize = function (newSize) {
-    console.log("before " + size);
-
-    //    configs.update({
-    //        tag: "size"
-    //    }, {
-    //        $set: {
-    //            value: newSize
-    //        }
-    //    });
-
-    console.log("after " + size);
+    size = newSize;
 }
-
 getSize = function () {
-    return configs.find({
-        tag: "size"
-    }).fetch()[0].value;
+    return size;
 }
 
-// strokeColor
+// color
 var color = "rgb(100%, 0%, 0%";
 setColor = function (newColor) {
     color = newColor;
-}
-
-insertElement = function () {
-    var offset = $('#canvas').offset();
-    Meteor.call('insert', event.pageX - offset.left, event.pageY - offset.top, getSize(), color, function () {});
 }

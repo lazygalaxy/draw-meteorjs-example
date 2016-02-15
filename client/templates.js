@@ -22,19 +22,18 @@ Template.colorbar.events({
     }
 });
 
+var draw = false;
 Template.canvas.events({
     'click': function (event) {
-        insertElement();
+        insertElement(true);
     },
     'mousedown': function (event) {
-        Session.set('draw', true);
+        draw = true;
     },
     'mouseup': function (event) {
-        Session.set('draw', false);
+        draw = false;
     },
     'mousemove': function (event) {
-        if (Session.get('draw')) {
-            insertElement();
-        }
+        insertElement(draw);
     }
 });

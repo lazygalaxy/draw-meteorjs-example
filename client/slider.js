@@ -1,8 +1,8 @@
     $(function () {
         $("#size-slider").slider({
-            step: 2,
-            min: 2,
-            max: 30,
+            step: 4,
+            min: 4,
+            max: 40,
             value: getSize(),
             slide: function (event, ui) {
                 setSize(ui.value);

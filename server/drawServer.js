@@ -3,10 +3,6 @@ Meteor.publish("colors", function () {
     return colors.find();
 });
 
-Meteor.publish("configs", function () {
-    return configs.find();
-});
-
 Meteor.publish("elements", function () {
     return elements.find();
 });
@@ -27,19 +23,6 @@ Meteor.methods({
 });
 
 //data initialize
-if (!configs.findOne()) {
-    console.log("adding configs");
-
-    configs.insert({
-        tag: "color",
-        value: "blue"
-    });
-    configs.insert({
-        tag: "size",
-        value: 20
-    });
-}
-
 if (!colors.findOne()) {
     console.log("adding colors");
 
