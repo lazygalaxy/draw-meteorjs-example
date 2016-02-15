@@ -117,28 +117,6 @@ setColor = function (newColor) {
 }
 
 insertElement = function () {
-
     var offset = $('#canvas').offset();
-
-    elements.insert({
-        //this draws a point exactly where you click the mouse
-        // x: (event.pageX - offset.left),
-        // y: (event.pageY - offset.top)});
-
-
-        //We can do more interesting stuff
-        //We need to input data in the right format
-        //Then we can send this to d3 for drawing
-
-
-        //1) Algorithmic mouse follower
-        // x: (event.pageX - offset.left)+(Math.cos((event.pageX/10  ))*30),
-        // y: (event.pageY - offset.top)+(Math.sin((event.pageY)/10)*30)});
-
-        //2) draw a line - requires you to change the code in drawing.js
-        x: (event.pageX - offset.left),
-        y: (event.pageY - offset.top),
-        s: getSize(),
-        c: color
-    }); // end of elements.insert()
+    Meteor.call('insert', event.pageX - offset.left, event.pageY - offset.top, getSize(), color, function () {});
 }

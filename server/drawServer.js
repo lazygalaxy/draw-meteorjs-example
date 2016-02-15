@@ -13,6 +13,14 @@ Meteor.publish("elements", function () {
 
 //methods
 Meteor.methods({
+    'insert': function (xPosi, yPosi, size, color) {
+        elements.insert({
+            x: xPosi,
+            y: yPosi,
+            s: size,
+            c: color
+        });
+    },
     'clear': function () {
         elements.remove({});
     }
