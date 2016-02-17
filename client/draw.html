@@ -27,13 +27,29 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <p class="navbar-btn">
-                            <button type="button" class="btn btn-default clear">
+                            <div class="btn-group">
+                                <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                                    <span class="caret"></span> Shape
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Circle</a></li>
+                                    <li><a href="#">Square</a></li>
+                                    <li><a href="#">Line</a></li>
+                                </ul>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-default">
+                                <span class="glyphicon glyphicon-menu-left"></span> Undo
+                            </button>
+                            <button type="button" class="btn btn-primary btn-default">
+                                <span class="glyphicon glyphicon-menu-right"></span> Redo
+                            </button>
+                            <button type="button" class="btn btn-primary btn-default clear">
                                 <span class="glyphicon glyphicon-trash"></span> Clear
                             </button>
+                            <button type="button" class="btn btn-primary btn-default">
+                                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                            </button>
                         </p>
-                    </li>
-                    <li>
-                        <a href="/photos">Photos</a>
                     </li>
                 </ul>
             </div>
