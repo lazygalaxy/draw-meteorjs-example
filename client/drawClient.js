@@ -10,9 +10,14 @@ Meteor.startup(function () {
             var svg;
 
             var createSvg = function () {
-                svg = d3.select('#canvas').append('svg')
-                    .attr('width', 2000)
-                    .attr('height', 300);
+                svg = d3.select('#canvas')
+                    .classed("svg-container", true) //container class to make it responsive
+                    .append("svg")
+                    //responsive SVG needs these 2 attributes and no width and height attr
+                    .attr("preserveAspectRatio", "xMinYMin meet")
+                    .attr("viewBox", "0 0 600 400")
+                    //class to make it responsive
+                    .classed("svg-content-responsive", true);
             };
             createSvg();
 
