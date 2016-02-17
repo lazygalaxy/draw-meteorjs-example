@@ -6,78 +6,69 @@ Meteor.subscribe("elements");
 var canvas;
 Meteor.startup(function () {
     canvas = new function () {
-            var self = this;
-            var svg;
+        var self = this;
+        var svg;
 
-            var createSvg = function () {
-                svg = d3.select('#canvas')
-                    .classed("svg-container", true) //container class to make it responsive
-                    .append("svg")
-                    //responsive SVG needs these 2 attributes and no width and height attr
-                    .attr("preserveAspectRatio", "xMinYMin meet")
-                    .attr("viewBox", "0 0 600 400")
-                    //class to make it responsive
-                    .classed("svg-content-responsive", true);
-            };
+        var createSvg = function () {
+            svg = d3.select('#canvas')
+                .classed("svg-container", true) //container class to make it responsive
+                .append("svg")
+                //responsive SVG needs these 2 attributes and no width and height attr
+                .attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "0 0 600 400")
+                //class to make it responsive
+                .classed("svg-content-responsive", true);
+        };
+        createSvg();
+
+        self.clear = function () {
+            d3.select('svg').remove();
             createSvg();
+        };
 
-            self.clear = function () {
-                d3.select('svg').remove();
-                createSvg();
-            };
-
-            self.draw = function (data) {
-                if (data.length < 1) {
-                    self.clear();
-                    return;
-                }
-                if (svg) {
-                    // to draw a circle -
-                    svg.selectAll('circle').data(data, function (d) {
-                            return d._id;
-                        })
-                        .enter().append('circle')
-                        .attr('r', function (d) {
-                            return d.s;
-                        })
-                        .attr('cx', function (d) {
-                            return d.x;
-                        })
-                        .attr('cy', function (d) {
-                            return d.y;
-                        }).attr('fill', function (d) {
-                            return d.c;
-                        });
-
-                    //to draw a line
-                    //                    svg.selectAll('line').data(data, function (d) {
-                    //                            return d._id;
-                    //                        })
-                    //                        .enter().append('line')
-                    //                        .attr('x1', function (d) {
-                    //                            return d.x;
-                    //                        })
-                    //                        .attr('y1', function (d) {
-                    //                            return d.y;
-                    //                        })
-                    //                        .attr('x2', function (d) {
-                    //                            return d.x1;
-                    //                        })
-                    //                        .attr('y2', function (d) {
-                    //                            return d.y1;
-                    //                        })
-                    //                        .attr("stroke-width", function (d) {
-                    //                            return d.w;
-                    //                        })
-                    //                        .attr("stroke", function (d) {
-                    //                            return d.c;
-                    //                        })
-                    //                        .attr("stroke-linejoin", "round");
+        self.draw = function (data) {
+            if (data.length < 1) {
+                self.clear();
+                return;
+            }
+            if (svg) {
+                //                    // to draw a circle -
+                //                    svg.selectAll('circle').data(data, function (d) {
+                //                            return d._id;
+                //                        })
+                //                        .enter().append('circle')
+                //                        .attr('r', function (d) {
+                //                            return d.s;
+                //                        })
+                //                        .attr('cx', function (d) {
+                //                            return d.x;
+                //                        })
+                //                        .attr('cy', function (d) {
+                //                            return d.y;
+                //                        }).attr('fill', function (d) {
+                //                            return d.c;
+                //                        });
 
 
-                } // end of the if(svg) statement
-            }; // end of the canvas.draw function
-        } //end of the canvas function
+                // to draw a square -
+                svg.selectAll('circle').data(data, function (d) {
+                        return d._id;
+                    })
+                    .enter().append('rect')
+                    .attr('x', function (d) {
+                        return d.x;
+                    }).attr('y', function (d) {
+                        return d.y;
+                    }).attr('fill', function (d) {
+                        return d.c;
+                    }).attr('width', function (d) {
+                        return d.x + d.s;
+                    }).attr('height', function (d) {
+                        return d.y + d.s;
+                    });
+            }
+        };
+    }
 
     Deps.autorun(function () {
         var data = elements.find({}).fetch();
