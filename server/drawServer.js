@@ -9,8 +9,9 @@ Meteor.publish("elements", function () {
 
 //methods
 Meteor.methods({
-    'insert': function (xPosi, yPosi, size, color) {
+    'insert': function (shape, xPosi, yPosi, size, color) {
         elements.insert({
+            sh: shape,
             x: xPosi,
             y: yPosi,
             s: size,

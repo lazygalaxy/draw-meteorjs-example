@@ -4,9 +4,9 @@ Meteor.subscribe("elements");
 
 // canvas
 var canvas;
+var shape = 'circle';
 Meteor.startup(function () {
     canvas = new function () {
-        var self = this;
         var svg;
 
         var createSvg = function () {
@@ -21,51 +21,36 @@ Meteor.startup(function () {
         };
         createSvg();
 
-        self.clear = function () {
+        this.clear = function () {
             d3.select('svg').remove();
             createSvg();
         };
 
-        self.draw = function (data) {
+        this.draw = function (data) {
             if (data.length < 1) {
-                self.clear();
+                this.clear();
                 return;
             }
+
             if (svg) {
-                //                    // to draw a circle -
-                //                    svg.selectAll('circle').data(data, function (d) {
-                //                            return d._id;
-                //                        })
-                //                        .enter().append('circle')
-                //                        .attr('r', function (d) {
-                //                            return d.s;
-                //                        })
-                //                        .attr('cx', function (d) {
-                //                            return d.x;
-                //                        })
-                //                        .attr('cy', function (d) {
-                //                            return d.y;
-                //                        }).attr('fill', function (d) {
-                //                            return d.c;
-                //                        });
+                data.forEach(function (d) {
+                    console.log('drawing ' + d);
 
-
-                // to draw a square -
-                svg.selectAll('circle').data(data, function (d) {
-                        return d._id;
-                    })
-                    .enter().append('rect')
-                    .attr('x', function (d) {
-                        return d.x;
-                    }).attr('y', function (d) {
-                        return d.y;
-                    }).attr('fill', function (d) {
-                        return d.c;
-                    }).attr('width', function (d) {
-                        return d.x + d.s;
-                    }).attr('height', function (d) {
-                        return d.y + d.s;
-                    });
+                    if (d.sh == 'rectangle') {
+                        svg.append('rect')
+                            .attr('x', d.x)
+                            .attr('y', d.y)
+                            .attr('fill', d.c)
+                            .attr('width', d.x + d.s)
+                            .attr('height', d.y + d.s);
+                    } else if (d.sh == 'circle') {
+                        svg.append('circle')
+                            .attr('r', d.s)
+                            .attr('cx', d.x)
+                            .attr('cy', d.y)
+                            .attr('fill', d.c);
+                    }
+                });
             }
         };
     }
@@ -88,7 +73,7 @@ clearCanvas = function () {
 insertElement = function (draw) {
     if (draw) {
         var offset = $('#canvas').offset();
-        Meteor.call('insert', event.pageX - offset.left, event.pageY - offset.top, getSize(), color, function () {});
+        Meteor.call('insert', shape, event.pageX - offset.left, event.pageY - offset.top, getSize(), color, function () {});
     }
 }
 
