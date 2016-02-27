@@ -11,11 +11,13 @@ Meteor.publish("elements", function () {
 Meteor.methods({
     'insert': function (shape, xPosi, yPosi, size, color) {
         elements.insert({
+            createdAt: new Date(),
             sh: shape,
             x: xPosi,
             y: yPosi,
             s: size,
-            c: color
+            c: color,
+            ignore: false
         });
     },
     'clear': function () {

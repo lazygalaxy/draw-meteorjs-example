@@ -5,8 +5,10 @@ Meteor.subscribe("elements");
 // canvas
 var canvas;
 var shape = 'circle';
+var lastDate = new Date(2000, 0, 0, 0, 0, 0, 0);
 Meteor.startup(function () {
     canvas = new function () {
+
         var svg;
 
         var createSvg = function () {
@@ -24,44 +26,58 @@ Meteor.startup(function () {
         this.clear = function () {
             d3.select('svg').remove();
             createSvg();
+            console.log("cleared!");
         };
 
-        this.draw = function (data) {
+        this.drawElement = function (d) {
+            if (d.sh == 'rectangle') {
+                svg.append('rect')
+                    .attr('x', d.x)
+                    .attr('y', d.y)
+                    .attr('fill', d.c)
+                    .attr('width', d.x + d.s)
+                    .attr('height', d.y + d.s);
+            } else if (d.sh == 'circle') {
+                svg.append('circle')
+                    .attr('r', d.s)
+                    .attr('cx', d.x)
+                    .attr('cy', d.y)
+                    .attr('fill', d.c);
+            }
+
+            lastDate = d.createdAt;
+        };
+
+        this.drawAll = function (data) {
+            //console.log(data);
             if (data.length < 1) {
-                this.clear();
+                canvas.clear();
                 return;
             }
 
             if (svg) {
                 data.forEach(function (d) {
-                    console.log('drawing ' + d);
-
-                    if (d.sh == 'rectangle') {
-                        svg.append('rect')
-                            .attr('x', d.x)
-                            .attr('y', d.y)
-                            .attr('fill', d.c)
-                            .attr('width', d.x + d.s)
-                            .attr('height', d.y + d.s);
-                    } else if (d.sh == 'circle') {
-                        svg.append('circle')
-                            .attr('r', d.s)
-                            .attr('cx', d.x)
-                            .attr('cy', d.y)
-                            .attr('fill', d.c);
-                    }
+                    canvas.drawElement(d);
                 });
             }
         };
     }
 
     Deps.autorun(function () {
-        var data = elements.find({}).fetch();
+        //console.log('drawing ' + lastDate);
+        var data = elements.find({
+            "ignore": {
+                "$ne": true,
 
-        if (canvas) {
-            canvas.draw(data);
-        }
+            },
+            "createdAt": {
+                "$gt": lastDate
+            }
+        }).fetch();
+        canvas.drawAll(data);
     });
+
+
 });
 
 clearCanvas = function () {
