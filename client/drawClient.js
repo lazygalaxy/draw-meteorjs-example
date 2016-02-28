@@ -27,6 +27,25 @@ Meteor.startup(function () {
             console.log("cleared!");
         };
 
+        this.save = function () {
+            console.log('saving!');
+
+            var html = d3.select("svg")
+                .attr("version", 1.1)
+                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .node().parentNode.innerHTML;
+
+            var imgsrc = 'data:image/svg+xml;base64,' + btoa(html);
+            //var img = '<img src="' + imgsrc + '">';
+
+            var a = document.createElement("a");
+            a.download = "draw.svg";
+            a.href = imgsrc;
+            a.click();
+
+            console.log('saving done!');
+        };
+
         this.drawElement = function (d) {
             if (d.sh == 'square') {
                 svg.append('rect')
@@ -85,7 +104,13 @@ Meteor.startup(function () {
 clearCanvas = function () {
     Meteor.call('clear', function () {
         canvas.clear();
+        xPosi2 = -1;
+        yPosi2 = -1;
     });
+}
+
+saveCanvas = function () {
+    canvas.save();
 }
 
 var xPosi2 = -1;

@@ -28,6 +28,9 @@ Template.toolbar.events({
     },
     "click .size-dropdown li a": function (event) {
         setSize(event.target.text);
+    },
+    "click button.save": function (event) {
+        saveCanvas();
     }
 });
 
