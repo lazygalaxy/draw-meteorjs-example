@@ -4,7 +4,6 @@ Meteor.subscribe("elements");
 
 // canvas
 var canvas;
-var shape = 'circle';
 var lastDate = new Date(2000, 0, 0, 0, 0, 0, 0);
 Meteor.startup(function () {
     canvas = new function () {
@@ -30,7 +29,7 @@ Meteor.startup(function () {
         };
 
         this.drawElement = function (d) {
-            if (d.sh == 'rectangle') {
+            if (d.sh == 'square') {
                 svg.append('rect')
                     .attr('x', d.x)
                     .attr('y', d.y)
@@ -91,6 +90,14 @@ insertElement = function (draw) {
         var offset = $('#canvas').offset();
         Meteor.call('insert', shape, event.pageX - offset.left, event.pageY - offset.top, getSize(), color, function () {});
     }
+}
+
+var shape = 'circle';
+setShape = function (newShape) {
+    shape = newShape;
+}
+getShape = function () {
+    return shape;
 }
 
 // size

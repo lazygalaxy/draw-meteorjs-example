@@ -10,9 +10,18 @@ Template.color.helpers({
     }
 });
 
+Template.toolbar.helpers({
+    getShape: function () {
+        return getShape();
+    }
+});
+
 Template.toolbar.events({
     "click button.clear": function (event) {
         clearCanvas();
+    },
+    "click .shape-dropdown li a": function (event) {
+        setShape(event.target.text);
     }
 });
 
