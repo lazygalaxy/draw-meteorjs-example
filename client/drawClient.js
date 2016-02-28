@@ -7,7 +7,6 @@ var canvas;
 var lastDate = new Date(2000, 0, 0, 0, 0, 0, 0);
 Meteor.startup(function () {
     canvas = new function () {
-
         var svg;
 
         var createSvg = function () {
@@ -16,7 +15,7 @@ Meteor.startup(function () {
                 .append("svg")
                 //responsive SVG needs these 2 attributes and no width and height attr
                 .attr("preserveAspectRatio", "xMinYMin meet")
-                .attr("viewBox", "0 0 600 400")
+                .attr("viewBox", "0 0 600 300")
                 //class to make it responsive
                 .classed("svg-content-responsive", true);
         };
@@ -34,11 +33,11 @@ Meteor.startup(function () {
                     .attr('x', d.x)
                     .attr('y', d.y)
                     .attr('fill', d.c)
-                    .attr('width', d.x + d.s)
-                    .attr('height', d.y + d.s);
+                    .attr('width', d.s)
+                    .attr('height', d.s);
             } else if (d.sh == 'circle') {
                 svg.append('circle')
-                    .attr('r', d.s)
+                    .attr('r', d.s / 2)
                     .attr('cx', d.x)
                     .attr('cy', d.y)
                     .attr('fill', d.c);
@@ -88,16 +87,25 @@ clearCanvas = function () {
 insertElement = function (draw) {
     if (draw) {
         var offset = $('#canvas').offset();
-        Meteor.call('insert', shape, event.pageX - offset.left, event.pageY - offset.top, getSize(), color, function () {});
+        var canvas_width = $('#canvas').width();
+        var canvas_height = $('#canvas').height();
+
+        var xRatio = canvas_width / 600.0;
+        var yRatio = canvas_height / 300.0;
+
+        var xPosi = (event.pageX - offset.left - 20) / xRatio;
+        var yPosi = (event.pageY - offset.top) / yRatio;
+
+        Meteor.call('insert', getShape(), xPosi, yPosi, getSize(), color, function () {});
     }
 }
 
-var shape = 'circle';
+Session.set('shape', 'circle');
 setShape = function (newShape) {
-    shape = newShape;
+    Session.set('shape', newShape);
 }
 getShape = function () {
-    return shape;
+    return Session.get('shape');
 }
 
 // size
