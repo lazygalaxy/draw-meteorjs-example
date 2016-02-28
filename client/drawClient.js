@@ -104,15 +104,13 @@ insertElement = function (draw) {
 
         if (getShape() != 'line' || xPosi2 != -1) {
             Meteor.call('insert', getShape(), xPosi, yPosi, getSize(), color, xPosi2, yPosi2, function () {});
-            xPosi2 = -1;
-            yPosi2 = -1;
-        } else {
-            xPosi2 = xPosi;
-            yPosi2 = yPosi;
         }
+        xPosi2 = xPosi;
+        yPosi2 = yPosi;
     }
 }
 
+// shape
 Session.set('shape', 'circle');
 setShape = function (newShape) {
     Session.set('shape', newShape);
@@ -124,12 +122,12 @@ getShape = function () {
 }
 
 // size
-var size = 20;
+Session.set('size', 20);
 setSize = function (newSize) {
-    size = newSize;
+    Session.set('size', newSize);
 }
 getSize = function () {
-    return size;
+    return Session.get('size');
 }
 
 // color

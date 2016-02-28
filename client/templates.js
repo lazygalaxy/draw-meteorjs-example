@@ -13,6 +13,9 @@ Template.color.helpers({
 Template.toolbar.helpers({
     getShape: function () {
         return getShape();
+    },
+    getSize: function () {
+        return getSize();
     }
 });
 
@@ -22,6 +25,9 @@ Template.toolbar.events({
     },
     "click .shape-dropdown li a": function (event) {
         setShape(event.target.text);
+    },
+    "click .size-dropdown li a": function (event) {
+        setSize(event.target.text);
     }
 });
 

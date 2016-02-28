@@ -37,12 +37,20 @@
                                     <li><a href="#">line</a></li>
                                 </ul>
                             </div>
-                            <button type="button" class="btn btn-primary btn-default">
-                                <span class="glyphicon glyphicon-menu-left"></span> Undo
-                            </button>
-                            <button type="button" class="btn btn-primary btn-default">
-                                <span class="glyphicon glyphicon-menu-right"></span> Redo
-                            </button>
+                            <div class="btn-group">
+                                <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                                    <span class="caret"></span> {{getSize}}
+                                </button>
+                                <ul class="dropdown-menu size-dropdown">
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">10</a></li>
+                                    <li><a href="#">15</a></li>
+                                    <li><a href="#">20</a></li>
+                                    <li><a href="#">25</a></li>
+                                    <li><a href="#">30</a></li>
+                                </ul>
+                            </div>
                             <button type="button" class="btn btn-primary btn-default clear">
                                 <span class="glyphicon glyphicon-trash"></span> Clear
                             </button>
