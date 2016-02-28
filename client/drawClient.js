@@ -41,6 +41,14 @@ Meteor.startup(function () {
                     .attr('cx', d.x)
                     .attr('cy', d.y)
                     .attr('fill', d.c);
+            } else if (d.sh == 'line') {
+                svg.append('line')
+                    .attr('x1', d.x)
+                    .attr('y1', d.y)
+                    .attr('x2', d.x2)
+                    .attr('y2', d.y2)
+                    .attr('stroke-width', d.s)
+                    .attr('stroke', d.c);
             }
 
             lastDate = d.createdAt;
@@ -64,10 +72,6 @@ Meteor.startup(function () {
     Deps.autorun(function () {
         //console.log('drawing ' + lastDate);
         var data = elements.find({
-            "ignore": {
-                "$ne": true,
-
-            },
             "createdAt": {
                 "$gt": lastDate
             }
@@ -84,6 +88,8 @@ clearCanvas = function () {
     });
 }
 
+var xPosi2 = -1;
+var yPosi2 = -1;
 insertElement = function (draw) {
     if (draw) {
         var offset = $('#canvas').offset();
@@ -96,13 +102,22 @@ insertElement = function (draw) {
         var xPosi = (event.pageX - offset.left - 20) / xRatio;
         var yPosi = (event.pageY - offset.top) / yRatio;
 
-        Meteor.call('insert', getShape(), xPosi, yPosi, getSize(), color, function () {});
+        if (getShape() != 'line' || xPosi2 != -1) {
+            Meteor.call('insert', getShape(), xPosi, yPosi, getSize(), color, xPosi2, yPosi2, function () {});
+            xPosi2 = -1;
+            yPosi2 = -1;
+        } else {
+            xPosi2 = xPosi;
+            yPosi2 = yPosi;
+        }
     }
 }
 
 Session.set('shape', 'circle');
 setShape = function (newShape) {
     Session.set('shape', newShape);
+    xPosi2 = -1;
+    yPosi2 = -1;
 }
 getShape = function () {
     return Session.get('shape');

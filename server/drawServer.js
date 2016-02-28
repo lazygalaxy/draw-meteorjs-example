@@ -9,7 +9,7 @@ Meteor.publish("elements", function () {
 
 //methods
 Meteor.methods({
-    'insert': function (shape, xPosi, yPosi, size, color) {
+    'insert': function (shape, xPosi, yPosi, size, color, xPosi2, yPosi2) {
         elements.insert({
             createdAt: new Date(),
             sh: shape,
@@ -17,7 +17,8 @@ Meteor.methods({
             y: yPosi,
             s: size,
             c: color,
-            ignore: false
+            x2: xPosi2,
+            y2: yPosi2
         });
     },
     'clear': function () {
